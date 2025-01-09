@@ -2,6 +2,7 @@ import express from 'express';
 import jwt from "jsonwebtoken";
 import User from '../models/User.js';
 import auth from '../middlewares/auth.js';
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -17,10 +18,9 @@ router.post("/users/signup", async (req, res) =>{
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            role: "user"
         });
         await user.save();
-
+        return res.status(201).json({ user: user });
     } catch (error) {
         res.status(500).send("Somthin went wrong", error);
     }
@@ -32,9 +32,10 @@ router.post("/users/login", async(req, res) =>{
     user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send('Invalid email or password.');
 
+    let validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword) return res.status(400).send("Invalid email or password.");
 
     try {
-
         const token = jwt.sign({
             id: user.id,
             role: user.role,

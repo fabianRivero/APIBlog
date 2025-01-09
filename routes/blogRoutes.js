@@ -2,19 +2,27 @@ import express from 'express';
 import Blog from '../models/Blog.js';
 import auth from '../middlewares/auth.js';
 import admin from '../middlewares/admin.js';
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
-//para obtener todos los blogs
+//para obtener todos los blogs con el filtrado por categoria
+//GET /blogs?tags=adelgazamiento,fuerza
 router.get('/blogs', async (req, res) => {
-    const pageSize = parseInt(req.query.pageSize) || 10;
+    const pageSize = parseInt(req.query.pageSize) || 7;
     const page = parseInt(req.query.page) || 1;
-
+    const filter = {};
+    if (req.query.tags) {
+        const tagsArray = req.query.tags.split(',');
+        filter.tags = { $in: tagsArray };
+    }
+    
     try {
-        const blogs = await Blog.find()
+        const blogs = await Blog.find(filter)
+        .sort({ publicationDate: -1 })
         .skip((page - 1) * pageSize)
         .limit(pageSize);
-        const total = await Blog.countDocuments();
+        const total = await Blog.countDocuments(filter);
 
         res.status(200).json({
             blogs,
@@ -45,7 +53,7 @@ try {
 router.post("/blogs", [auth, admin], async (req, res) => {
     let blog;
     blog = new Blog({
-        id: req.user.id,
+        id: uuidv4(),
         title: req.body.title,
         linkTitle: req.body.linkTitle,
         description: req.body.description,
@@ -53,13 +61,17 @@ router.post("/blogs", [auth, admin], async (req, res) => {
         tags: req.body.tags,
         cardImage: req.body.cardImage,
         content: req.body.content,
-        extendedDate: req.body.extendedDate
+        extendedDate: req.body.extendedDate,
     });
     try {
+        console.log("antes de salvar")
+        // const newBlog = new Blog({ ...blog, id: uuidv4() });
+        // await newBlog.save();
         await blog.save();
-        res.status(200).json({ blog: blog });
+        console.log("despues de salvar")
+        return res.status(200).json({ blog: blog });
     } catch (error) {
-        res.status(500).send('something went wrong.', error);
+        res.status(500).json(`Something went wrong: ${error.message}`);
     };
 });
 
@@ -90,6 +102,7 @@ router.delete('/blogs/:id', [auth, admin], async (req, res) => {
         res.status(404).json({ message: "Server error " + error.message });
     }
 });
+
 
 //para comentar o calificar un blog
 router.patch('/blogs/:id', [auth], async (req, res) => {

@@ -12,12 +12,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlYWYyOTEyL
 }
 
 ###
-
-GET HTTP://localhost:4000/api/blogs HTTP/1.1
+GET HTTP://localhost:4000/api/blogs?page=2&pageSize=2 HTTP/1.1
 
 ###
 
-GET HTTP://localhost:4000/api/blogs/2281742a-774e-4514-b0cc-214adc872333 HTTP/1.1
+###
+GET HTTP://localhost:4000/api/blogs HTTP/1.1
+###
+
+GET HTTP://localhost:4000/api/blogs/38bc2e40-bc1b-4c17-a51c-ac8e581cd63f HTTP/1.1
 
 ###
 
