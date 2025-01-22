@@ -32,7 +32,8 @@ router.post("/users/login", async(req, res) =>{
     user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send('Invalid email or password.');
 
-    let validPassword = await bcrypt.compare(req.body.password, user.password);
+    // let validPassword = await bcrypt.compare(req.body.password, user.password);
+    let validPassword = await User.findOne({ password: req.body.password });
     if (!validPassword) return res.status(400).send("Invalid email or password.");
 
     try {
@@ -95,20 +96,6 @@ router.put('/users/:id', async (req, res) => {
         res.status(500).json({ message: "Server error " + error.message });
     }
 });
-
-//para borrar un usuario existente
-// router.delete('/users/:id', async (req, res) => {
-//     try {
-//         const user = await User.findOneAndDelete({ id: req.params.id });
-//         if (!user) {
-//             return res.status(404).json({ message: "User not found" });
-//         }
-
-//         res.status(200).json({ user: user });
-//     } catch (error) {
-//         res.status(404).json({ message: "Server error " + error.message });
-//     }
-// });
 
 //para añadir el comentario o calificacion al usuario
 router.patch('/users/:id', [auth], async (req, res) => {

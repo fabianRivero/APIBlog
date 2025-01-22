@@ -9,7 +9,7 @@ const router = express.Router();
 //para obtener todos los blogs con el filtrado por categoria
 //GET /blogs?tags=adelgazamiento,fuerza
 router.get('/blogs', async (req, res) => {
-    const pageSize = parseInt(req.query.pageSize) || 7;
+    const pageSize = parseInt(req.query.pageSize) || 6;
     const page = parseInt(req.query.page) || 1;
     const filter = {};
     if (req.query.tags) {
@@ -19,7 +19,7 @@ router.get('/blogs', async (req, res) => {
     
     try {
         const blogs = await Blog.find(filter)
-        .sort({ publicationDate: -1 })
+        // .sort({ publicationDate: -1 })
         .skip((page - 1) * pageSize)
         .limit(pageSize);
         const total = await Blog.countDocuments(filter);
@@ -65,8 +65,6 @@ router.post("/blogs", [auth, admin], async (req, res) => {
     });
     try {
         console.log("antes de salvar")
-        // const newBlog = new Blog({ ...blog, id: uuidv4() });
-        // await newBlog.save();
         await blog.save();
         console.log("despues de salvar")
         return res.status(200).json({ blog: blog });
