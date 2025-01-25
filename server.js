@@ -1,6 +1,6 @@
 import "dotenv/config";
 import app from './app.js';
-// import resetDatabase from './resetDataBase.js';
+import resetDatabase from './resetDataBase.js';
 
 const host = "localhost";
 const port = process.env.PORT || 3000;

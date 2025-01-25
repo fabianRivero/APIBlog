@@ -22,7 +22,7 @@ router.post("/users/signup", async (req, res) =>{
         await user.save();
         return res.status(201).json({ user: user });
     } catch (error) {
-        res.status(500).send("Somthin went wrong", error);
+        res.status(500).json({error: "Somthin went wrong", details: error.message});
     }
 });
 
@@ -32,8 +32,7 @@ router.post("/users/login", async(req, res) =>{
     user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(400).send('Invalid email or password.');
 
-    // let validPassword = await bcrypt.compare(req.body.password, user.password);
-    let validPassword = await User.findOne({ password: req.body.password });
+    let validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send("Invalid email or password.");
 
     try {
@@ -55,7 +54,7 @@ router.post("/users/login", async(req, res) =>{
         });
         
     } catch (error) {
-        res.status(500).send("Somthin went wrong", error);
+        res.status(500).json({error: "Somthin went wrong", details: error.message});
     }
 });
 
@@ -66,7 +65,7 @@ router.get('/users/', async (req, res) => {
         const users = await User.find({});
         res.status(200).json({users: users});    
     } catch (error) {
-        res.status(500).send({ message: "Server Error " + error.message });
+        res.status(500).json({error: "Somthin went wrong", details: error.message});
     }
 });
 
@@ -83,6 +82,7 @@ try {
 }
 });
 
+
 //para editar un blog existente
 router.put('/users/:id', async (req, res) => {
     const updates = req.body;
@@ -97,7 +97,7 @@ router.put('/users/:id', async (req, res) => {
     }
 });
 
-//para añadir el comentario o calificacion al usuario
+//para añadir o borrar el comentario o calificacion al usuario
 router.patch('/users/:id', [auth], async (req, res) => {
     const updates = req.body;
     try {

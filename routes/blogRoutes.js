@@ -31,7 +31,7 @@ router.get('/blogs', async (req, res) => {
             currentPage: page,
     });    
     } catch (error) {
-        res.status(500).send({ message: "Server Error " + error.message });
+        res.status(500).json({error: "Somthin went wrong", details: error.message});
     }
 });
 
@@ -94,11 +94,13 @@ router.delete('/blogs/:id', [auth, admin], async (req, res) => {
         if (!blog) {
             return res.status(404).json({ message: "Blog not found" });
         }
-
         res.status(200).json({ blog: blog });
+
     } catch (error) {
         res.status(404).json({ message: "Server error " + error.message });
     }
+
+
 });
 
 

@@ -9,7 +9,7 @@ router.get('/emails/', async (req, res) => {
         const emailList = emails.map(doc => doc.email);
         res.status(200).json(emailList);    
     } catch (error) {
-        res.status(500).send({ message: "Server Error " + error.message });
+        res.status(500).json({error: "Somthin went wrong", details: error.message});
     }
 });
 

@@ -731,7 +731,7 @@ const baseData = {
         {
           "name": "admin",
           "email": "admin@email.com",
-          "password": "12345678",
+          "password": "$2b$10$c0mL9Q44xc7clzESbJCD0.t.x6NATgodkO6a26uBCpV0a/hxtMN6e",
           "role": "admin",
           "blogsCommented": [
             {
@@ -826,7 +826,7 @@ const baseData = {
         {
           "name": "user1",
           "email": "user1@email.com",
-          "password": "12345678",
+          "password": "$2b$10$EPcUsbV7t4YxKThNq9GbF.Yrfv8jXgXGdY/6tpXrqkdThV61HoFe2",
           "role": "user",
           "blogsCommented": [
             {
@@ -921,7 +921,7 @@ const baseData = {
         {
           "name": "user2",
           "email": "user2@email.com",
-          "password": "12345678",
+          "password": "$2b$10$mtvE6MHJsBHBix47w0Iy0OSZEwpTjjfl3v07doWMtHJyRDvRM9D4a",
           "role": "user",
           "blogsCommented": [
             {
@@ -1001,7 +1001,7 @@ const baseData = {
         {
           "name": "user3",
           "email": "user3@email.com",
-          "password": "12345678",
+          "password": "$2b$10$bQYzoNpZhFw0qUOKCbl9JOZSmBeyGTZ35H9PAG524mvDL/JVIwn..",
           "role": "user",
           "blogsCommented": [],
           "blogsLiked": [
@@ -1102,7 +1102,7 @@ const baseData = {
         {
           "name": "user4",
           "email": "user4@email.com",
-          "password": "12345678",
+          "password": "$2b$10$GLcMru/yP0vfI5fjes0TZObUWShrjlVY0g7fLIeewATXNlEaWPqHq",
           "role": "user",
           "blogsCommented": [],
           "blogsLiked": [
@@ -1203,7 +1203,7 @@ const baseData = {
         {
           "name": "user5",
           "email": "user5@email.com",
-          "password": "12345678",
+          "password": "$2b$10$ojbut/sRtoMTfqPcs4UHuO271jsxZV7O4y5D.oc0d81gtAwdwYhiK",
           "role": "user",
           "blogsCommented": [],
           "blogsLiked": [],
