@@ -12,7 +12,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImRlYWYyOTEyL
 }
 
 ###
-GET HTTP://localhost:4000/api/blogs?pageSize=18 HTTP/1.1
+GET HTTP://localhost:4000/api/blogs?pageSize=19 HTTP/1.1
 
 ###
 
@@ -20,7 +20,7 @@ GET HTTP://localhost:4000/api/blogs?pageSize=18 HTTP/1.1
 GET HTTP://localhost:4000/api/blogs HTTP/1.1
 ###
 
-GET HTTP://localhost:4000/api/blogs/38bc2e40-bc1b-4c17-a51c-ac8e581cd63f HTTP/1.1
+GET HTTP://localhost:4000/api/blogs/d0d3e774-ae7b-4b7d-9b5a-14c0af861f16 HTTP/1.1
 
 ###
 

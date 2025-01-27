@@ -2,10 +2,10 @@ POST http://localhost:4000/api/users/signup HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "admin@email.com",
+    "email": "user5@email.com",
     "password": "12345678",
-    "name": "admin",
-    "role": "admin"
+    "name": "user5",
+    "role": "user"
 }
 
 ###
@@ -24,4 +24,4 @@ GET http://localhost:4000/api/users/ HTTP/1.1
 
 ###
 
-GET http://localhost:4000/api/users/91f3fa65-9ae5-4a0f-acd7-0a50363c504f HTTP/1.1
+GET http://localhost:4000/api/users/231337c9-4300-4dd9-be4a-8d1af9ec5131 HTTP/1.1
