@@ -82,20 +82,18 @@ try {
 }
 });
 
-
-//para editar un blog existente
-router.put('/users/:id', async (req, res) => {
-    const updates = req.body;
+//para eliminar un usuario en especifico
+router.delete("/users/:id", [auth], async (req, res) => {
     try {
-        const user = await User.findOneAndUpdate({ email: req.params.email }, updates, { new: true });
+        const user = await User.findOneAndDelete({ id: req.params.id });
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-        res.status(200).json({ user: user });
+        res.status(200).json({ user: user })
     } catch (error) {
-        res.status(500).json({ message: "Server error " + error.message });
+        res.status(500).json({ message: "Server error " + error.message })
     }
-});
+    });   
 
 //para añadir o borrar el comentario o calificacion al usuario
 router.patch('/users/:id', [auth], async (req, res) => {

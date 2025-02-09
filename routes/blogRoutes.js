@@ -99,8 +99,6 @@ router.delete('/blogs/:id', [auth, admin], async (req, res) => {
     } catch (error) {
         res.status(404).json({ message: "Server error " + error.message });
     }
-
-
 });
 
 
